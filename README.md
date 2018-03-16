@@ -15,6 +15,16 @@ Notre problème peut donc être associé à un problème plus vaste où il s'agi
 
 Il nous faut repérer entre 0 et n participants par image.
 
+### Vérité terrain
+
+Nous avons constitué un dataset avec:
+- Des images trouvées sur internet
+- Des images du Raid de Centrale
+
+Nous avons donc un fichier avec le nom de l'image <-> les numéros de dossard que l'on y trouve qui nous permet de juger de la qualité de nos prédictions
+
+(A tester aussi: https://supervise.ly/)
+
 ###  Pistes
 
 #### The stroke width transform (SWT)
@@ -26,7 +36,15 @@ SWT n'est pas implémenté encore dans openCV apparemment. Mais: https://github.
 - On peut utiliser https://en.wikipedia.org/wiki/Tesseract_(software) / https://github.com/tesseract-ocr/tesseract
 Fonctionnement expliqué ici: https://static.googleusercontent.com/media/research.google.com/fr//pubs/archive/33418.pdf
 
+- Un problème similaire: la lecture de plaques d'immatriculatio:
+Avec un LSTM: https://hackernoon.com/latest-deep-learning-ocr-with-keras-and-supervisely-in-15-minutes-34aecd630ed8
+Et un résau convolutionnel: https://towardsdatascience.com/number-plate-detection-with-supervisely-and-tensorflow-part-1-e84c74d4382c
 
+- Un github avec plein d'info sur l'OCR: https://github.com/hs105/Deep-Learning-for-OCR
+- Avec un réseau convolutionnel que l'on peut adapter: https://nicholastsmith.wordpress.com/2017/10/14/deep-learning-ocr-using-tensorflow-and-python/
+- Autre idée: adapter le TP 2 (MNIST)
+
+-
 ### Mesures d'erreur
 
 

@@ -27,6 +27,9 @@ Nous avons donc un fichier avec le nom de l'image <-> les numéros de dossard qu
 
 ###  Pistes
 
+#### Object detection
+Comparaison des méthodes de deep learning pour la détection d'objets (ici coureur puis dossard) : http://cv-tricks.com/object-detection/faster-r-cnn-yolo-ssd/
+
 #### The stroke width transform (SWT)
 Repose sur l'idée que les dossards ont toujours en théorie la même forme et la même organisation.
 SWT n'est pas implémenté encore dans openCV apparemment. Mais: https://github.com/subokita/Robust-Text-Detection

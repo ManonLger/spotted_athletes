@@ -8,7 +8,6 @@ __Auteur__ : Manon Léger, Emmanuel de Revel, Eymard Houdeville<br>
 ## Index
 1. [Description](#description)
 
-
 ## <a name="description"></a>1. Description du problème
 Ce projet a pour objectif de d'automatiser la reconnaissance de dossards dans les événements sportifs de l'école.
 Notre problème peut donc être associé à un problème plus vaste où il s'agit de lire un document dans une photo de la vie réelle (plaque d'immatricuation,publicité, captcha...)
@@ -36,6 +35,9 @@ SWT n'est pas implémenté encore dans openCV apparemment. Mais: https://github.
 
 #### Lecture du texte (OCR)
 
+
+- Reconnaissance des tickets de caisse au supermarché: https://dzone.com/articles/using-ocr-for-receipt-recognition
+
 - On peut utiliser https://en.wikipedia.org/wiki/Tesseract_(software) / https://github.com/tesseract-ocr/tesseract
 Fonctionnement expliqué ici: https://static.googleusercontent.com/media/research.google.com/fr//pubs/archive/33418.pdf
 
@@ -47,7 +49,6 @@ Et un résau convolutionnel: https://towardsdatascience.com/number-plate-detecti
 - Avec un réseau convolutionnel que l'on peut adapter: https://nicholastsmith.wordpress.com/2017/10/14/deep-learning-ocr-using-tensorflow-and-python/
 - Autre idée: adapter le TP 2 (MNIST)
 
--
 ### Mesures d'erreur
 
 

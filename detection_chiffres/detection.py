@@ -8,11 +8,6 @@ class Dossard:
         self._img = img
         self._process_img = img
 
-    @property
-    def img(self):
-        return self._img
-
-
     # Redimensionnement de l'image
     def _resize(self, size):
         self._img=cv2.resize(self._img, size)
@@ -72,5 +67,6 @@ class Dossard:
         self._threshold(130)
         self._dilate(1)
         self._cropNumber()
+        return self._img
 
 

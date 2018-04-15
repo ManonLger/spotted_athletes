@@ -3,6 +3,13 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
+def setup_network():
+	os.chdir('../darknet')
+	subprocess.call('make')
+	os.chdir('../yolo')
+	if 'yolov3.weights' not in os.listdir(os.getcwd()):
+		subprocess.call(['wget', 'https://pjreddie.com/media/files/yolov3.weights'])
+
 def run_detector(txt_path):
 	# Process txt file
 	txt_path = '../samples/'+txt_path
@@ -66,5 +73,6 @@ if __name__ == '__main__':
 	if len(args) != 2:
 		print("Please enter 1 argument: the name of the txt file containing your list of images (eg: samples.txt).\n This file MUST be placed in /samples directory.")
 	else:
+		setup_network()
 		run_detector(args[1])
 		parse_boxes(args[1])

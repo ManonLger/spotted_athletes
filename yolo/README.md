@@ -14,8 +14,16 @@ cd ../darknet
 ```
 Box coordinates are saved to a `*_boxes.txt` file, with each line like: `<original_file_name> <person_nb> <left> <right> <top> <bottom>`.
 
-Or, if you're lazy and you want to use our python script to perform detection + crop images and save them in a folder :
+Or, if you're lazy and you want to use our python script to load everything + perform detection + crop images and save them in a folder :
 ```
 python run.py samples.txt
 ```
 Cropped images are saved to a new `samples.txt_results` directory.
+
+If you ever want to train the model once again, just do:
+[optional] : label new images (see `labeling/README.md`)
+then:
+```
+cd training
+python train.py
+```

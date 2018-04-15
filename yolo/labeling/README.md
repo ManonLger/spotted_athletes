@@ -13,4 +13,4 @@ Follow instructions here to label with OpenLabeling : https://github.com/Cartuch
 **3. Extract you images for future use**
 
 Run `bbox.py` to keep only labeled images. They are now stored in `labeled_img`.
-Move `bbox_txt` folder to `/labeling` root.
+Move `bbox_txt/` folder to `labeling/`, and rename it `labels/`.

@@ -1,1 +1,3 @@
 yolo/yolov3.weights
+yolo/labeling/nnd/*
+yolo/labeling/OpenLabeling/images/*

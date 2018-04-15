@@ -1,20 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
-import pytesseract
 import os
-import torch
-from torch.autograd import Variable
-import utils
-import dataset
-from PIL import Image
-import os
-import models.crnn as crnn
-import numpy as np
 import cv2
 
+import torch
+from torch.autograd import Variable
+import torchvision.transforms as transforms
+import models.crnn as crnn
+
+import pytesseract
+
 # Options
-WITH_TESSERACT = True
+WITH_TESSERACT = False
 
 class read_with_crnn():
 
@@ -23,6 +21,9 @@ class read_with_crnn():
         self.img_path = path
         self.alphabet = '0123456789abcdefghijklmnopqrstuvwxyz'
         self.disp=True
+        self.interpolation=Image.BILINEAR
+        self.toTensor = transforms.ToTensor()
+        self.size=(100, 32)
 
     def predict(self):
 
@@ -32,10 +33,19 @@ class read_with_crnn():
             print('loading pretrained model from %s' % self.model_path)
 
         model.load_state_dict(torch.load(self.model_path))
-        converter = utils.strLabelConverter(self.alphabet)
-        transformer = dataset.resizeNormalize((100, 32))
+
+        self.alphabet = self.alphabet.lower()
+        self.alphabet = self.alphabet + '-'
+        self.dict = {}
+        for i, char in enumerate(self.alphabet):
+            self.dict[char] = i + 1
+
         image = Image.open(self.img_path).convert('L')
-        image = transformer(image)
+
+        image = image.resize(self.size, self.interpolation)
+        image = self.toTensor(image)
+        image.sub_(0.5).div_(0.5)
+
         image = image.view(1, *image.size())
         image = Variable(image)
         model.eval()
@@ -45,11 +55,36 @@ class read_with_crnn():
         preds = preds.transpose(1, 0).contiguous().view(-1)
 
         preds_size = Variable(torch.IntTensor([preds.size(0)]))
-        raw_pred = converter.decode(preds.data, preds_size.data, raw=True)
-        sim_pred = converter.decode(preds.data, preds_size.data, raw=False)
+        raw_pred = self.decode(preds.data, preds_size.data, raw=True)
+        sim_pred = self.decode(preds.data, preds_size.data, raw=False)
         print('%-20s => %-20s' % (raw_pred, sim_pred))
 
         return sim_pred
+
+    def decode(self, t, length, raw=False):
+        if length.numel() == 1:
+            length = length[0]
+            assert t.numel() == length, "text with length: {} does not match declared length: {}".format(t.numel(), length)
+            if raw:
+                return ''.join([self.alphabet[i - 1] for i in t])
+            else:
+                char_list = []
+                for i in range(length):
+                    if t[i] != 0 and (not (i > 0 and t[i - 1] == t[i])):
+                        char_list.append(self.alphabet[t[i] - 1])
+                return ''.join(char_list)
+        else:
+            assert t.numel() == length.sum(), "texts with length: {} does not match declared length: {}".format(t.numel(), length.sum())
+            texts = []
+            index = 0
+            for i in range(length.numel()):
+                l = length[i]
+                texts.append(
+                    self.decode(
+                        t[index:index + l], torch.IntTensor([l]), raw=raw))
+                index += l
+            return texts
+
 
 class read_with_tesseract():
     def __init__(self,path):

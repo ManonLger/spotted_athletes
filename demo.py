@@ -6,8 +6,8 @@ from matplotlib import pyplot as plt
 #Detect number on bib
 print("Using Number detection module")
 dossard=Dossard("dossard_raid_2.jpg")
-dossard.numberDetection()
-plt.imshow(dossard.img)
+number=dossard.numberDetection()
+plt.imshow(number)
 plt.show()
 print("Number detected")
 

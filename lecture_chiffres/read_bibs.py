@@ -1,13 +1,11 @@
-import numpy as np
-import matplotlib.pyplot as plt
+
 from PIL import Image
-import os
 import cv2
 
 import torch
 from torch.autograd import Variable
 import torchvision.transforms as transforms
-import models.crnn as crnn
+import lecture_chiffres.models.crnn as crnn
 
 import pytesseract
 
@@ -17,7 +15,7 @@ WITH_TESSERACT = False
 class read_with_crnn():
 
     def __init__(self,path):
-        self.model_path = './models/crnn.pth'
+        self.model_path = 'lecture_chiffres/models/crnn.pth'
         self.img_path = path
         self.alphabet = '0123456789abcdefghijklmnopqrstuvwxyz'
         self.disp=True
@@ -95,7 +93,9 @@ class read_with_tesseract():
         return pred
 
 if __name__=='__main__':
+
     if WITH_TESSERACT:
+
         print("Using tesseract")
         path = './bib_samples/bib2.png'
         R = read_with_tesseract(path)
@@ -103,6 +103,7 @@ if __name__=='__main__':
         print(p)
 
     else:
+
         print("Using CRNN module")
         path='./bib_samples/bib2.png'
         C = read_with_crnn(path)

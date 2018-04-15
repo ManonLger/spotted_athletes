@@ -8,9 +8,9 @@ Run `nnd.py`
 
 **2. Manually perform labeling**
 
-Follow instructions here to label : https://github.com/Cartucho/OpenLabeling
+Follow instructions here to label with OpenLabeling : https://github.com/Cartucho/OpenLabeling
 
 **3. Extract you images for future use**
 
-Run `bbox.py` to keep only labeled images.
-They are now stored in `labeled_img`.
+Run `bbox.py` to keep only labeled images. They are now stored in `labeled_img`.
+Move `bbox_txt` folder to `/labeling` root.

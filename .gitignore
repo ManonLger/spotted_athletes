@@ -1,1 +1,7 @@
-lectures_chiffres/training/data/*
+yolo/yolov3.weights
+yolo/labeling/nnd/*
+yolo/labeling/OpenLabeling/images/*
+yolo/labeling/OpenLabeling/bbox_txt/*
+yolo/training/*.txt
+yolo/training/darknet53.conv.74
+yolo/training/weights/*

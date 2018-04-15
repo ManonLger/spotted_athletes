@@ -1,5 +1,6 @@
 from lecture_chiffres.read_bibs import read_with_crnn
 from detection_chiffres.detection import Dossard
+import os
 
 
 #Detect number on bib

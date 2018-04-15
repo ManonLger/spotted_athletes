@@ -37,7 +37,6 @@ def generate_sets():
 def run_training():
 	os.chdir('../../darknet')
 	subprocess.call(['./darknet', 'detector', 'train', '../yolo/training/nnd.data', '../yolo/training/nnd.cfg', '../yolo/training/darknet53.conv.74'])
-	os.chdir('../yolo/training')
 
 
 if __name__ == '__main__':

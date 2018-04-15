@@ -16,7 +16,7 @@ Box coordinates are saved to a `*_boxes.txt` file, with each line like: `<origin
 
 Or, if you're lazy and you want to use our python script to load everything + perform detection + crop images and save them in a folder :
 ```
-python run.py samples.txt
+python Detector.py
 ```
 Cropped images are saved to a new `samples.txt_results` directory.
 

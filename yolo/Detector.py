@@ -12,17 +12,18 @@ class Detector:
 	[This file MUST be placed in /weights directory.]
 	"""
 
-	def __init__(txt_path, to_detect=0, weights=None):
+	def __init__(self, txt_path, to_detect=0, weights=None):
+		os.chdir('yolo')
 		self._to_detect = to_detect
 		self._txt_path = txt_path
 		self._weights = self._get_weights(weights)
 		self._make_yolo()
 
-	def run():
+	def run(self):
 		self._run_detector()
 		self._parse_boxes()
 
-	def _get_weights(weights):
+	def _get_weights(self, weights):
 		if self._to_detect == 0 and weights == None:
 			if 'yolov3.weights' not in os.listdir(os.getcwd()):
 				subprocess.call(['wget', 'https://pjreddie.com/media/files/yolov3.weights'])
@@ -35,12 +36,12 @@ class Detector:
 		else:
 			print("Wrong arguments.")
 
-	def _make_yolo():
+	def _make_yolo(self):
 		os.chdir('../darknet')
 		subprocess.call('make')
 		os.chdir('../yolo')
 
-	def _run_detector():
+	def _run_detector(self):
 		# Process txt file
 		path = '../samples/'+self._txt_path
 		with open(path, 'r') as t:
@@ -64,7 +65,7 @@ class Detector:
 			subprocess.call(['./darknet', 'detector', 'txt', '../yolo/training/nnd.data', '../yolo/bib.cfg', self._weights, path])
 		os.chdir('../yolo')
 
-	def _parse_boxes():
+	def _parse_boxes(self):
 		boxes_path = '../samples/'+self._txt_path+'_boxes.txt'
 		try:
 			# Prepare files and directories
@@ -80,6 +81,9 @@ class Detector:
 				class_name = 'person'
 			elif self._to_detect == 1:
 				class_name = 'bib'
+			os.chdir(dir_path)
+			os.mkdir(class_name)
+			os.chdir('..')
 
 			# Parse boxes, crop and save images
 			for b in boxes[:-1]:
@@ -99,7 +103,7 @@ class Detector:
 		except IOError:
 			print('Nothing detected!')
 
-	def _crop_image(img_path, left, right, top, bottom):
+	def _crop_image(self, img_path, left, right, top, bottom):
 		img = cv2.imread(img_path, 1)
 		width = right-left
 		height = bottom-top
@@ -111,6 +115,6 @@ class Detector:
 
 
 if __name__ == '__main__':
-	d = Detector('samples.txt', 0 'nnd_final.weights')
+	d = Detector('samples.txt')
 	# d = Detector('samples.txt', 1, 'nnd_final.weights')
 	d.run()

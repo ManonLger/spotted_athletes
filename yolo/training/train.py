@@ -12,7 +12,7 @@ def generate_sets():
 
 	# Randomly generate sets from available images
 	n = len(images)
-	for i in range(10):
+	for i in range(100):
 		for s in (train_set, val_set, test_set):
 			r = randrange(n)
 			while any((r in train_set, r in val_set, r in test_set)):
@@ -36,7 +36,7 @@ def generate_sets():
 
 def run_training():
 	os.chdir('../../darknet')
-	subprocess.call(['./darknet', 'detector', 'train', '../yolo/training/nnd.data', 'cfg/yolov3-voc.cfg', '../yolo/training/darknet53.conv.74'])
+	subprocess.call(['./darknet', 'detector', 'train', '../yolo/training/nnd.data', '../yolo/training/nnd.cfg', '../yolo/training/darknet53.conv.74'])
 	os.chdir('../yolo/training')
 
 

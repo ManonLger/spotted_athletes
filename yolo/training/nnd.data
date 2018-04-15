@@ -2,4 +2,4 @@ classes = 1
 train = ../yolo/training/train.txt
 valid = ../yolo/training/val.txt
 names = ../yolo/training/nnd.names
-backup = ../yolo/training/backup
+backup = ../yolo/training/weights

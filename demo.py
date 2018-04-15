@@ -13,7 +13,7 @@ for bib_name in os.listdir("detection_chiffres/detection_inputs"):
 
 # Read a bib number
 print("Using CRNN module")
-path = 'samples/bib/bib1.png'
+path = 'samples/bib/69.png'
 C = read_with_crnn(path)
 c = C.predict()
 print(c)

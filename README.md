@@ -49,19 +49,3 @@ Et un résau convolutionnel: https://towardsdatascience.com/number-plate-detecti
 - Avec un réseau convolutionnel que l'on peut adapter: https://nicholastsmith.wordpress.com/2017/10/14/deep-learning-ocr-using-tensorflow-and-python/
 - Autre idée: adapter le TP 2 (MNIST)
 
-### Mesures d'erreur
-
-
-# Bibliographie
-Racing Bib Number Recognition, paper de Tel Aviv University, 2011
-
-  - Appliquer directement un réseau de neurones sur nos photos pour repérer les dossards est inneficace: il y a trop de bruit dans l'environnement pour que le réseau les isole avec assurance
-  - L'article montre qu'en isolant un individu avant de repérer son dossard on obtient des résultats bien plus statisfaisants
-  - Leurs étapes:
-    - Ils repèrent les visages puis distinguent une située 0.5*H en dessous de la tête (avec H la hauteur de la case contenant la tête) et dessinent un rectanglede taille 3*H x 7/3L (avec L la largeur de la box contenant la face)
-    - Utilisation d'une SWT pour repérer les tags dans ces zones
-    - Une ou deux transformations pour vérifier que le tag est bien entier
-    - Utilisation de "Tesseract engine" pour lire le texte
-    
-    
-## NB: PATH=$PATH:/Users/eymardhoudeville/Library/Python/3.6/bin

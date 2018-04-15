@@ -8,3 +8,4 @@ if __name__ == '__main__':
 	for img_name in images:
 		if img_name[:-4] in txts:
 			shutil.copy('images/'+img_name, '../labeled_img/'+img_name)
+			shutil.copy('bbox_txt/'+img_name[:-4]+'.txt', '../labeled_img/'+img_name[:-4]+'.txt')

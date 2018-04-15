@@ -62,3 +62,6 @@ Racing Bib Number Recognition, paper de Tel Aviv University, 2011
     - Utilisation d'une SWT pour repérer les tags dans ces zones
     - Une ou deux transformations pour vérifier que le tag est bien entier
     - Utilisation de "Tesseract engine" pour lire le texte
+    
+    
+## NB: PATH=$PATH:/Users/eymardhoudeville/Library/Python/3.6/bin

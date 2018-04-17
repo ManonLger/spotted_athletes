@@ -13,7 +13,7 @@ class Detector:
 	"""
 
 	def __init__(self, txt_path, to_detect=0, weights=None):
-		os.chdir('yolo')
+		# os.chdir('yolo')
 		self._to_detect = to_detect
 		self._txt_path = txt_path
 		self._weights = self._get_weights(weights)
@@ -82,7 +82,10 @@ class Detector:
 			elif self._to_detect == 1:
 				class_name = 'bib'
 			os.chdir(dir_path)
-			os.mkdir(class_name)
+			try:
+				os.mkdir(class_name)
+			except OSError:
+				pass
 			os.chdir('..')
 
 			# Parse boxes, crop and save images
@@ -115,6 +118,6 @@ class Detector:
 
 
 if __name__ == '__main__':
-	d = Detector('samples.txt')
-	# d = Detector('samples.txt', 1, 'nnd_final.weights')
+	# d = Detector('samples.txt')
+	d = Detector('samples_nnd.txt', 1, 'nnd_700.weights')
 	d.run()

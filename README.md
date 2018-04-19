@@ -6,9 +6,33 @@
 __Auteur__ : Manon Léger, Emmanuel de Revel, Eymard Houdeville<br>
 
 ## Index
-1. [Description](#description)
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Description](#description)
 
-## <a name="description"></a>1. Description du problème
+## <a name="installation"></a>1. Installation
+**Pré-requis**
++ Environnement UNIX
++ Python 3.6
++ OpenCV 2
+
+**Installation**
+```
+git clone https://gitlab.centralesupelec.fr/2014houdevile/spotted_athletes.git
+cd spotted_athletes/yolo/darknet
+git clone https://github.com/Manon-L/darknet.git
+cd darknet
+make
+cd ../../labeling/OpenLabeling
+git clone https://github.com/Cartucho/OpenLabeling.git
+cd ../../..
+```
+
+## <a name="usage"></a>2. Usage
+Pour détecter les numéros de dossard sur l'ensemble de test, il suffit d'exécuter `demo.py`.
+Pour ré-entraîner le modèle, exécuter `Trainer.py`.
+
+## <a name="description"></a>3. Description du problème
 Ce projet a pour objectif de d'automatiser la reconnaissance de dossards dans les événements sportifs de l'école.
 Notre problème peut donc être associé à un problème plus vaste où il s'agit de lire un document dans une photo de la vie réelle (plaque d'immatricuation,publicité, captcha...)
 
@@ -18,13 +42,13 @@ Il nous faut repérer entre 0 et n participants par image.
 
 Nous avons constitué un dataset avec:
 - Des images trouvées sur internet
-- Des images du Raid de Centrale
+- Des images du Night'N'Day de CentraleSupélec
 
 Nous avons donc un fichier avec le nom de l'image <-> les numéros de dossard que l'on y trouve qui nous permet de juger de la qualité de nos prédictions
 
 (A tester aussi: https://supervise.ly/)
 
-###  Pistes
+### Pistes
 
 #### Object detection
 Comparaison des méthodes de deep learning pour la détection d'objets (ici coureur puis dossard) : http://cv-tricks.com/object-detection/faster-r-cnn-yolo-ssd/
@@ -34,7 +58,6 @@ Repose sur l'idée que les dossards ont toujours en théorie la même forme et l
 SWT n'est pas implémenté encore dans openCV apparemment. Mais: https://github.com/subokita/Robust-Text-Detection
 
 #### Lecture du texte (OCR)
-
 
 - Reconnaissance des tickets de caisse au supermarché: https://dzone.com/articles/using-ocr-for-receipt-recognition
 

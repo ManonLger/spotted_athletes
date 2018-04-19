@@ -12,7 +12,7 @@ class Trainer:
 
 	def __init__(self, reshape_sets=False, weights=None):
 		os.chdir('yolo/training')
-		self.weights = _get_weights(weights)
+		self.weights = self._get_weights(weights)
 		current_dir = os.listdir(os.getcwd())
 		if reshape_sets or 'train.txt' not in current_dir or 'val.txt' not in current_dir or 'test.txt' not in current_dir:
 			self._generate_sets()
@@ -52,7 +52,7 @@ class Trainer:
 			train_set.append(get_r())
 		for i in range(100):
 			val_set.append(get_r())
-		test_set = range(len(images)) - set(train_set) - set(val_set)
+		test_set = set(i for i in range(len(images))) - set(train_set) - set(val_set)
 
 		# Get corresponding images paths
 		def get_path(img):

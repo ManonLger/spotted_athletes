@@ -21,7 +21,9 @@ __Auteur__ : Manon Léger, Emmanuel de Revel, Eymard Houdeville<br>
 git clone https://gitlab.centralesupelec.fr/2014houdevile/spotted_athletes.git
 cd spotted_athletes/yolo/darknet
 git clone https://github.com/Manon-L/darknet.git
-cd ../labeling/OpenLabeling
+cd darknet
+make
+cd ../../labeling/OpenLabeling
 git clone https://github.com/Cartucho/OpenLabeling.git
 cd ../../..
 ```

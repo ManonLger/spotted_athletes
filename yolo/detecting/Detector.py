@@ -28,7 +28,6 @@ class Detector:
 		if prefix:
 			self._prefix_txt_file(prefix)
 		self.weights = self._get_weights(weights)
-		self._make_yolo()
 
 	def run(self):
 		self._run_detector()
@@ -44,11 +43,6 @@ class Detector:
 				return '../training/weights/bib_final.weights'
 			else:
 				return '../training/weights/'+weights
-		else:
-			print("Wrong arguments.")
-
-	def _make_yolo(self):
-		subprocess.call('../darknet/make')
 
 	def _prefix_txt_file(self, prefix):
 		with open(self.txt_path, 'r') as t:
@@ -93,20 +87,27 @@ class Detector:
 			# Parse boxes, crop and save images
 			for b in boxes[:-1]:
 				img_path, nb, left, right, top, bottom = b.split()
-				img_name = '%s/%s/%s_%s.png' % (dir_path, self.to_detect, img_path[11:], nb)
-				cropped = self._crop_image(img_path, int(left), int(right), int(top), int(bottom))
+				success, cropped = self._crop_image(img_path, int(left), int(right), int(top), int(bottom))
+				if not success:
+					pass
+				else:
+					short_img_path = img_path[img_path.rindex('/')+1:-4]
+					img_name = '%s/%s/%s_%s.png' % (dir_path, self.to_detect, short_img_path, nb)
 
-				# rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
-				# plt.imshow(rgb, interpolation='nearest')
-				# plt.show()
-				
-				print('Saving to '+img_name)
-				cv2.imwrite(img_name, cropped)
+					# rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
+					# plt.imshow(rgb, interpolation='nearest')
+					# plt.show()
 
-			os.remove(boxes_path)
+					print('Saving to '+img_name)
+					print(os.getcwd())
+					cv2.imwrite(img_name, cropped)
 		
 		except IOError:
 			print('Nothing detected!')
+		try:
+			os.remove(boxes_path)
+		except IOError:
+			pass
 
 	def _crop_image(self, img_path, left, right, top, bottom):
 		img = cv2.imread(img_path, 1)
@@ -116,9 +117,9 @@ class Detector:
 			for i in range(height):
 				for j in range(width):
 					cropped[i,j] = img[i+top, j+left]
-			return cropped
+			return True, cropped
 		except ValueError:
-			return None
+			return False, np.zeros([1,1,3], dtype=np.uint8)
 
 
 if __name__ == '__main__':
